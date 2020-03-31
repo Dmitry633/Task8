@@ -31,7 +31,7 @@ for (let i=0; i < divValue.length; i++ ) {
 	}
 }
 
-console.log(allButtons);
+console.log(allButtons);*/
 //calc.disabled = true;
 
 
