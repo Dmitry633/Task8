@@ -30,52 +30,27 @@ for (let i=0; i < divValue.length; i++ ) {
 	if (nameSplit[1] == 'value') {resTabVal[nameClass] = divValue[i];
 	}
 }
-console.log(resTabVal);*/
 
-// console.log(startCalc);
-// console.log(budgetValue);
-// console.log(daybudget);
-// console.log(level);
-// console.log(expensesValue);
-// console.log(optionalExepensesValue);
-// console.log(incomeValue);
-// console.log(monthsavings);
-// console.log(yearsavings);
-// console.log(expensesItem);
-// console.log(approve1);
-// console.log(approve2);
-// console.log(calc);
-// console.log(oExpenses);
-// console.log(IncomeItem);
-// console.log(checkbox);
-// console.log(sumValue);
-// console.log(percentValue);
-// console.log(yearValue);
-// console.log(monthValue);
-// console.log(dayValue);
 console.log(allButtons);
 //calc.disabled = true;
 
-/*allButtons.forEach(function(item){
-	for (let k=0; k<allButtons.length-2; k++){
-	//item.setAttribute('disabled','disabled')
-	console.log(k);
-	console.log(allButtons.length);
-	}
-});*/
 
 
 //allButtons[0].setAttribute('disabled','disabled');
 
 let money, time;	
 
-if(money == undefined){
+approve1.disabled = true;
+approve2.disabled = true;
+calc.disabled = true;
+
+/*if(money == undefined){
 	for (let k=0; k<allButtons.length-1; k++){
 		allButtons[k].setAttribute('disabled','disabled');//первый 'disabled' - установка названия нового атрибута, второй 'disabled' - задание значения этого атрибута
 		//console.log(k);
 		}
 	}
-	console.log(money);									//объявляем переменный - делаем их глобальными, для их видимости вне функции
+	console.log(money);		*/							//объявляем переменный - делаем их глобальными, для их видимости вне функции
 
 startCalc.addEventListener('click', function() {
 	time = prompt('Введите дату в формате YYYY-MM-DD', '');
@@ -93,12 +68,16 @@ startCalc.addEventListener('click', function() {
     yearValue.value = new Date(Date.parse(time)).getFullYear();
     monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
 	dayValue.value = new Date(Date.parse(time)).getDate();
-	console.log(money);	
+
+	approve1.disabled = false;
+	approve2.disabled = false;
+	calc.disabled = false;
+	/*console.log(money);	
 	if(money != undefined){
 		for (let k=0; k<allButtons.length-1; k++){
 			allButtons[k].removeAttribute('disabled');//'disabled' - название удаляемого атрибута
-	}
-}
+		}
+}*/
 });
 
 
@@ -120,11 +99,11 @@ approve1.addEventListener('click', function(){
 		}
 	}
 	expensesValue.textContent = sum;//19.50
-	appData.allExpenses = +sum;
-	console.log(appData.allExpenses);
+	//appData.allExpenses = +sum;
+	
 });
 
-
+console.log(expensesValue.textContent);
 
 approve2.addEventListener('click', function(){
 	for (let i = 0; i < oExpenses.length; i++)	{						
@@ -136,11 +115,11 @@ approve2.addEventListener('click', function(){
 
 calc.addEventListener('click', function(){
 	if(money != undefined){
-		appData.moneyPerDay = ((appData.budget-appData.allExpenses) / 30).toFixed();
+		appData.moneyPerDay = ((appData.budget- +expensesValue.textContent) / 30).toFixed();
 		daybudget.textContent = appData.moneyPerDay;
-		if (appData.moneyPerDay < 100) {
+		if (appData.moneyPerDay <= 100) {
 			level.textContent = 'Минимальный уровень достатка' ;
-		} else if (appData.moneyPerDay > 100 && appData.moneyPerDay < 2000) {
+		} else if (appData.moneyPerDay > 100 && appData.moneyPerDay <= 2000) {
 			level.textContent = 'Средний уровень достатка' ;
 		} else if ( appData.moneyPerDay > 2000) {
 			level.textContent = 'Высокий уровень достатка' ;
@@ -197,4 +176,3 @@ let appData = {
 	timeData: time,
 	savings: false
 };
-console.log(appData.allExpenses);
